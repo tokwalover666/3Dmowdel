@@ -27,11 +27,26 @@ public class playerLocomotion : MonoBehaviour
         Vector3 movementVelocity = moveDirection;
         playerManager.Instance.Rigidbody.velocity = movementVelocity;
 
+
+
     }
 
-    public void HandleRotation()
+    private void HandleRotation()
     {
+        Vector3 targetDirection = Vector3.zero;
+        targetDirection = cameraObject.forward * playerManager.Instance.InputManager.verticalInput;
+        targetDirection = targetDirection + cameraObject.right * playerManager.Instance.InputManager.verticalInput;
+        targetDirection.Normalize();
+        targetDirection.y = 0;
 
+        if (targetDirection == Vector3.zero)
+        {
+            targetDirection = transform.forward;
+        }
+
+        Quaternion targetRotataion = Quaternion.LookRotation(targetDirection);
+        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotataion, playerManager.Instance.Speed);
+        transform.rotation = playerRotation;
     }
 
 }

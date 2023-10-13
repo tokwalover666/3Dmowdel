@@ -6,9 +6,13 @@ public class playerManager : MonoBehaviour
 {
 
     public static playerManager Instance {get; private set;}
+    [Header("Scripts")]
+    public AnimatorManager animatorManager;
+
     public GameObject player;
     public playerLocomotion PlayerLocomotion;
     public inputManager InputManager;
+    [Header("Stats")]
     public float Speed;
     public Rigidbody Rigidbody;
 
@@ -37,6 +41,8 @@ public class playerManager : MonoBehaviour
     {
         InputManager.HandleAllInput();
     }
+
+
 
     private void FixedUpdate()
     {
