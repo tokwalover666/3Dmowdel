@@ -23,9 +23,20 @@ public class playerLocomotion : MonoBehaviour
         moveDirection = cameraObject.right * playerManager.Instance.InputManager.horizontalInput;
         moveDirection.Normalize();
         moveDirection.y = 0;
-        moveDirection = moveDirection * playerManager.Instance.Speed;
+
+        if (playerManager.Instance.isSprinting == true)
+        {
+            moveDirection = moveDirection * playerManager.Instance.sprintingSpeed;
+        }
+        else
+        {
+            moveDirection = moveDirection * playerManager.Instance.Speed;
+        }
+
         Vector3 movementVelocity = moveDirection;
         playerManager.Instance.Rigidbody.velocity = movementVelocity;
+
+
 
 
 

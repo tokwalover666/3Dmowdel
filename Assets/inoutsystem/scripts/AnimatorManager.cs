@@ -9,13 +9,19 @@ public class AnimatorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        horizontal = Animator.StringToHash("Horizontal");
+        horizontal = Animator.StringToHash("horizontal");
         vertical = Animator.StringToHash("vertical");
     }
 
     // Update is called once per frame
-    public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement)
+    public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement, bool isSprinting)
+
     {
-        playerManager.Instance.animatorManager.SetFloat(horizontal, horizontalMovement,0.1f, Time.deltaTime);
+        if (isSprinting)
+        {
+            horizontalMovement = 2;
+        }
+        playerManager.Instance.animator.SetFloat(horizontal, horizontalMovement, 0.1f, Time.deltaTime);
+        playerManager.Instance.animator.SetFloat(vertical, verticalMovement, 0.1f, Time.deltaTime);
     }
 }
