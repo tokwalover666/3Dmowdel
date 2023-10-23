@@ -9,7 +9,7 @@ public class inputManager : MonoBehaviour
     public Vector2 movementInput;
     public float verticalInput;
     public float horizontalInput;
-
+    public float moveSpeed;
     public float moveAmount;
 
     public bool sprintInput;
@@ -22,11 +22,13 @@ public class inputManager : MonoBehaviour
             //when WASD hit, record the movement to the variaable movementInput
             playerControl.PlayerControls.wasd.performed += i => movementInput = i.ReadValue<Vector2>();
 
+
+            //sprint
             playerControl.PlayerActions.Sprint.performed += i => sprintInput = true;
             playerControl.PlayerActions.Sprint.canceled += i => sprintInput = false;
 
-            playerControl.PlayerActions.Jump.performed += i => sprintInput = true;
-            playerControl.PlayerActions.Jump.canceled += i => sprintInput = false;
+            playerControl.PlayerActions.Walk.performed += i => walkIntput = true;
+            playerControl.PlayerActions.Walk.canceled += i => walkIntput = false;
         }
         playerControl.Enable();
     }
@@ -40,6 +42,7 @@ public class inputManager : MonoBehaviour
     {
         HandleMovementInput();
         HandleSprintingInput();
+        HandleWalkingInput();
     }
 
     private void HandleMovementInput()
@@ -49,6 +52,7 @@ public class inputManager : MonoBehaviour
 
         moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
         playerManager.Instance.animatorManager.UpdateAnimatorValues(0, moveAmount, playerManager.Instance.isSprinting);
+        playerManager.Instance.animatorManager.UpdateAnimatorValuesWalking(0, moveAmount, playerManager.Instance.isWalking);
     }
 
     private void HandleSprintingInput()
@@ -63,6 +67,18 @@ public class inputManager : MonoBehaviour
         }
     }
 
+    private void HandleWalkingInput()
+    {
+        if (walkIntput && moveAmount > 0.5)
+        {
+            playerManager.Instance.isWalking = true;
+        }
+        else
+        {
+            playerManager.Instance.isWalking = false;
+        }
+    }
+
 
 
     // Start is called before the first frame update
@@ -74,6 +90,8 @@ public class inputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3 moveDirection = new Vector3(horizontalInput, 0, verticalInput);
+        transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+
     }
 }

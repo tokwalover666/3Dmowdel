@@ -13,15 +13,18 @@ public class playerManager : MonoBehaviour
     public playerLocomotion PlayerLocomotion;
     public inputManager InputManager;
     [Header("Stats")]
-    public float Speed;
+    public float moveSpeed;
+    public float rotationSpeed;
+    public float runningSpeed;
     public float walkingSpeed;
     public float sprintingSpeed;
 
 
-    public Rigidbody Rigidbody;
+    public Rigidbody RigidBody;
 
     [Header("Actions")]
     public bool isSprinting;
+    public bool isWalking;
 
     public void Awake()
     {
@@ -40,7 +43,7 @@ public class playerManager : MonoBehaviour
     {
         InputManager = player.GetComponent<inputManager>();
         PlayerLocomotion = player.GetComponent<playerLocomotion>();
-        Rigidbody = player.GetComponent<Rigidbody>();
+        RigidBody = player.GetComponent<Rigidbody>();
         animatorManager = player.GetComponent<AnimatorManager>();
         animator = player.GetComponentInChildren<Animator>();
     }

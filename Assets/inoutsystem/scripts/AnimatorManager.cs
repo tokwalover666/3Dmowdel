@@ -19,9 +19,22 @@ public class AnimatorManager : MonoBehaviour
     {
         if (isSprinting)
         {
-            horizontalMovement = 2;
+            horizontalMovement = 6;
         }
         playerManager.Instance.animator.SetFloat(horizontal, horizontalMovement, 0.1f, Time.deltaTime);
         playerManager.Instance.animator.SetFloat(vertical, verticalMovement, 0.1f, Time.deltaTime);
+
+    }
+
+    public void UpdateAnimatorValuesWalking(float horizontalMovement, float verticalMovement, bool isWalking)
+
+    {
+        if (isWalking)
+        {
+            verticalMovement = 0.3f;
+        }
+        playerManager.Instance.animator.SetFloat(horizontal, horizontalMovement, 0.1f, Time.deltaTime);
+        playerManager.Instance.animator.SetFloat(vertical, verticalMovement, 0.1f, Time.deltaTime);
+
     }
 }

@@ -14,14 +14,14 @@ public class playerLocomotion : MonoBehaviour
     public void HandlesAllMovement()
     {
         HandlesMovement();
-        HandleRotation();
+        //HandleRotation();
     }
 
     public void HandlesMovement()
     {
         moveDirection = cameraObject.forward * playerManager.Instance.InputManager.verticalInput;
-        moveDirection = cameraObject.right * playerManager.Instance.InputManager.horizontalInput;
-        moveDirection.Normalize();
+        moveDirection = moveDirection + cameraObject.right * playerManager.Instance.InputManager.horizontalInput;
+        moveDirection.Normalize();  
         moveDirection.y = 0;
 
         if (playerManager.Instance.isSprinting == true)
@@ -30,23 +30,40 @@ public class playerLocomotion : MonoBehaviour
         }
         else
         {
-            moveDirection = moveDirection * playerManager.Instance.Speed;
+            if (playerManager.Instance.InputManager.moveAmount >= 0.5f)
+            {
+                moveDirection = moveDirection * playerManager.Instance.moveSpeed;
+            }
+            else
+            {
+                moveDirection = moveDirection * playerManager.Instance.runningSpeed;
+            }
+        }
+
+        if (playerManager.Instance.isWalking == true)
+        {
+            moveDirection = moveDirection * playerManager.Instance.walkingSpeed;
+        }
+        else
+        {
+            moveDirection = moveDirection * playerManager.Instance.runningSpeed;
         }
 
         Vector3 movementVelocity = moveDirection;
-        playerManager.Instance.Rigidbody.velocity = movementVelocity;
+
+        playerManager.Instance.RigidBody.velocity = movementVelocity;
 
 
 
 
 
     }
-
-    private void HandleRotation()
+/*
+    public void HandleRotation()
     {
         Vector3 targetDirection = Vector3.zero;
         targetDirection = cameraObject.forward * playerManager.Instance.InputManager.verticalInput;
-        targetDirection = targetDirection + cameraObject.right * playerManager.Instance.InputManager.verticalInput;
+        targetDirection = targetDirection + cameraObject.right * playerManager.Instance.InputManager.horizontalInput;
         targetDirection.Normalize();
         targetDirection.y = 0;
 
@@ -56,8 +73,9 @@ public class playerLocomotion : MonoBehaviour
         }
 
         Quaternion targetRotataion = Quaternion.LookRotation(targetDirection);
-        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotataion, playerManager.Instance.Speed);
+        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotataion, playerManager.Instance.rotationSpeed);
         transform.rotation = playerRotation;
-    }
+    }*/
+
 
 }

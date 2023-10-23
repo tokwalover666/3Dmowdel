@@ -151,18 +151,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "d3a4195b-f2b4-45f2-b151-61716f66ddbb",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Walk",
                     "type": "Button",
-                    "id": "6d824e5d-3d90-4e9e-babf-90f43ba724df",
+                    "id": "f5c7909f-899e-473d-9351-7711bc39c120",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -183,19 +174,8 @@
                 },
                 {
                     "name": "",
-                    "id": "c44df0fe-35ee-4426-b017-cc6dcab2bf58",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bb351159-1ed6-4f23-b605-1232b294f470",
-                    "path": "<Keyboard>/w",
+                    "id": "0baf7e41-f699-463f-9d8f-02f00261d02e",
+                    "path": "<Keyboard>/ctrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
