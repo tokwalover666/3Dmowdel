@@ -14,7 +14,7 @@ public class playerLocomotion : MonoBehaviour
     public void HandlesAllMovement()
     {
         HandlesMovement();
-        //HandleRotation();
+        HandleRotation();
     }
 
     public void HandlesMovement()
@@ -58,7 +58,7 @@ public class playerLocomotion : MonoBehaviour
 
 
     }
-/*
+
     public void HandleRotation()
     {
         Vector3 targetDirection = Vector3.zero;
@@ -75,7 +75,7 @@ public class playerLocomotion : MonoBehaviour
         Quaternion targetRotataion = Quaternion.LookRotation(targetDirection);
         Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotataion, playerManager.Instance.rotationSpeed);
         transform.rotation = playerRotation;
-    }*/
+    }
 
 
 }

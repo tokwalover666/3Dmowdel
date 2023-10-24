@@ -8,7 +8,7 @@ public class playerManager : MonoBehaviour
     public static playerManager Instance {get; private set;}
     [Header("Scripts")]
     public AnimatorManager animatorManager;
-    public Animator animator;
+
     public GameObject player;
     public playerLocomotion PlayerLocomotion;
     public inputManager InputManager;
@@ -19,8 +19,9 @@ public class playerManager : MonoBehaviour
     public float walkingSpeed;
     public float sprintingSpeed;
 
-
+    [Header("Components")]
     public Rigidbody RigidBody;
+    public Animator animator;
 
     [Header("Actions")]
     public bool isSprinting;
@@ -58,7 +59,7 @@ public class playerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        PlayerLocomotion.HandlesAllMovement();
     }
 
 }
